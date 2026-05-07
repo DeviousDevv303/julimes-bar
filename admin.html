@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Julimes Bar</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="login-screen" class="admin-login">
+        <div class="login-box">
+            <img src="assets/logo.jpg" alt="Julimes Bar" class="login-logo">
+            <h1>Acceso Administrador</h1>
+            <p>Julimes Bar - Panel de Control</p>
+            <form id="login-form">
+                <div class="form-group">
+                    <input type="password" id="admin-password" placeholder="Contraseña" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Entrar</button>
+            </form>
+            <p style="margin-top: 20px; font-size: 0.85rem;">
+                <a href="index.html" style="color: var(--color-text-muted);">← Volver al sitio</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="admin-dashboard" style="display: none;">
+        <header class="admin-header">
+            <div class="container">
+                <h1 class="admin-title">Julimes Bar - Admin</h1>
+                <nav class="admin-nav">
+                    <button class="active" data-tab="reviews">Reseñas</button>
+                    <button data-tab="events">Eventos</button>
+                    <button data-tab="menu">Menú</button>
+                    <button data-tab="settings">Configuración</button>
+                    <button class="logout-btn" onclick="adminLogout()">Salir</button>
+                </nav>
+            </div>
+        </header>
+
+        <main class="container" style="padding-top: 40px;">
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="number" id="stat-pending">0</div>
+                    <div class="label">Pendientes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number" id="stat-approved">0</div>
+                    <div class="label">Aprobadas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number" id="stat-total">0</div>
+                    <div class="label">Total Reseñas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number" id="stat-events">0</div>
+                    <div class="label">Eventos</div>
+                </div>
+            </div>
+
+            <!-- Reviews Tab -->
+            <div id="tab-reviews" class="tab-content active">
+                <h2 style="margin-bottom: 20px; color: var(--color-primary);">Reseñas Pendientes</h2>
+                <div class="data-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Calificación</th>
+                                <th>Comentario</th>
+                                <th>Fecha</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pending-reviews-table">
+                            <!-- Dynamic content -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2 style="margin: 40px 0 20px; color: var(--color-primary);">Reseñas Aprobadas</h2>
+                <div class="data-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Calificación</th>
+                                <th>Comentario</th>
+                                <th>Fecha</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="approved-reviews-table">
+                            <!-- Dynamic content -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Events Tab -->
+            <div id="tab-events" class="tab-content">
+                <h2 style="margin-bottom: 20px; color: var(--color-primary);">Gestionar Eventos</h2>
+                <div class="admin-form">
+                    <h3>Agregar Evento</h3>
+                    <form id="event-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Nombre del Evento</label>
+                                <input type="text" id="event-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Fecha</label>
+                                <input type="date" id="event-date" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Descripción</label>
+                            <textarea id="event-desc" rows="3" required></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Hora</label>
+                                <input type="time" id="event-time" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Tipo</label>
+                                <select id="event-type">
+                                    <option value="music">Música en Vivo</option>
+                                    <option value="special">Evento Especial</option>
+                                    <option value="promo">Promoción</option>
+                                    <option value="other">Otro</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Agregar Evento</button>
+                    </form>
+                </div>
+
+                <h3 style="margin-top: 40px; margin-bottom: 20px;">Eventos Programados</h3>
+                <div class="data-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Evento</th>
+                                <th>Fecha</th>
+                                <th>Hora</th>
+                                <th>Tipo</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="events-table">
+                            <!-- Dynamic content -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Menu Tab -->
+            <div id="tab-menu" class="tab-content">
+                <h2 style="margin-bottom: 20px; color: var(--color-primary);">Editar Menú</h2>
+                <div class="admin-form">
+                    <h3>Agregar Producto</h3>
+                    <form id="menu-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Nombre</label>
+                                <input type="text" id="item-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Precio</label>
+                                <input type="number" id="item-price" step="0.01" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Categoría</label>
+                            <select id="item-category">
+                                <option value="cervezas">Cervezas</option>
+                                <option value="cocteles">Cócteles</option>
+                                <option value="destilados">Destilados</option>
+                                <option value="botanas">Botanas</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Descripción (opcional)</label>
+                            <textarea id="item-desc" rows="2"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Agregar al Menú</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div id="tab-settings" class="tab-content">
+                <h2 style="margin-bottom: 20px; color: var(--color-primary);">Configuración</h2>
+                <div class="admin-form">
+                    <h3>Información del Negocio</h3>
+                    <form id="settings-form">
+                        <div class="form-group">
+                            <label>Teléfono</label>
+                            <input type="tel" id="setting-phone" placeholder="+52 123 456 7890">
+                        </div>
+                        <div class="form-group">
+                            <label>WhatsApp</label>
+                            <input type="tel" id="setting-whatsapp" placeholder="+52 123 456 7890">
+                        </div>
+                        <div class="form-group">
+                            <label>Horario</label>
+                            <input type="text" id="setting-hours" placeholder="Lunes a Domingo: 12:00 PM - 2:00 AM">
+                        </div>
+                        <div class="form-group">
+                            <label>Facebook URL</label>
+                            <input type="url" id="setting-facebook" placeholder="https://facebook.com/...">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
