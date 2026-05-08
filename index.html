@@ -26,7 +26,7 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="https://deviousdevv303.github.io/julimes-bar/">
     
-    <title>Julimes Bar - El corazón social de Julimes, Chihuahua</title>
+    <title>Julimes Bar - El Corazón de Julimes, Chihuahua</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
@@ -51,13 +51,11 @@
                     <span id="current-lang">ES</span> / <span>EN</span>
                 </button>
             </div>
-            <div class="hamburger">
+            <button class="hamburger" id="hamburger-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-links">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
-        </div>
-    </nav>
+            </button>
 
     <!-- Hero Section -->
     <section id="inicio" class="hero">
@@ -327,7 +325,7 @@
                         <span class="contact-icon">📞</span>
                         <div>
                             <h4 data-es="Teléfono / WhatsApp" data-en="Phone / WhatsApp">Teléfono / WhatsApp</h4>
-                            <p>639 167 9514</p>
+                            <p><a href="tel:+526391679514">639 167 9514</a></p>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -351,7 +349,7 @@
                 </div>
                 <div class="map-container">
                     <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3507.1234567890123!2d-105.425!3d28.4167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDI1JzAwLjAiNiAxMDXCsDI1JzMwLjAiVw!5e0!3m2!1ses!2smx!4v1234567890"
+                        src="https://maps.google.com/maps?q=Julimes,+Chihuahua,+Mexico&output=embed"
                         width="100%" 
                         height="400" 
                         style="border:0;" 
@@ -384,12 +382,13 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2024 Julimes Bar. <span data-es="Todos los derechos reservados." data-en="All rights reserved.">Todos los derechos reservados.</span></p>
+                <p>© <span id="footer-year"></span> Julimes Bar. <span data-es="Todos los derechos reservados." data-en="All rights reserved.">Todos los derechos reservados.</span></p>
                 <p data-es="Hecho con ❤️ por la familia Herrera Nunez" data-en="Made with ❤️ by the Herrera Nunez family">Hecho con ❤️ por la familia Herrera Nunez</p>
             </div>
         </div>
     </footer>
 
     <script src="script.js"></script>
+    <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
