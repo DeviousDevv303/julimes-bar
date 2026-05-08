@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /admin.html
+Disallow: /admin.css
+Disallow: /admin.js
+
+Sitemap: https://deviousdevv303.github.io/julimes-bar/sitemap.xml
