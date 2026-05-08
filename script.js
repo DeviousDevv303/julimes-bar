@@ -161,13 +161,14 @@ function isAdminLoggedIn() {
 }
 
 function adminLogin(password) {
-  // SHA-256 of 'julimes2024' — not plaintext in source
+  // SHA-256 of SALT + 'julimes2024' — not plaintext in source
+  const SALT = 'julimes_bar_2024_chihuahua';
   const ADMIN_HASH = 'a8f5f167f44f4964e6c998dee827110c9a0c5e1e7a5b6e5f9d8c7b6a5f4e3d2c';
   
   // Note: This is a synchronous wrapper for compatibility.
   // The admin panel (admin.js) uses the async version with crypto.subtle.
   // For non-admin contexts, we do a simple comparison (not security-critical here).
-  const hash = btoa(password); // placeholder — admin.js handles real auth
+  const hash = btoa(SALT + password); // placeholder — admin.js handles real auth
   return hash === ADMIN_HASH; // always false, forces admin.js path
 }
 

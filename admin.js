@@ -12,6 +12,7 @@ function isAdminLoggedIn() {
 }
 
 // SHA-256 helper for password verification (synchronous via cached hash)
+const SALT = 'julimes_bar_2024_chihuahua';
 const ADMIN_HASH = 'a8f5f167f44f4964e6c998dee827110c9a0c5e1e7a5b6e5f9d8c7b6a5f4e3d2c';
 
 async function sha256(message) {
@@ -23,7 +24,8 @@ async function sha256(message) {
 }
 
 async function adminLogin(password) {
-  const hash = await sha256(password);
+  const salted = SALT + password;
+  const hash = await sha256(salted);
   if (hash === ADMIN_HASH) {
     sessionStorage.setItem('admin_logged_in', 'true');
     return true;
