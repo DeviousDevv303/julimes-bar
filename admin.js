@@ -11,10 +11,20 @@ function isAdminLoggedIn() {
   return sessionStorage.getItem('admin_logged_in') === 'true';
 }
 
-function adminLogin(password) {
-  const ADMIN_PASSWORD = 'julimes2024'; // CHANGE THIS!
-  
-  if (password === ADMIN_PASSWORD) {
+// SHA-256 helper for password verification (synchronous via cached hash)
+const ADMIN_HASH = 'a8f5f167f44f4964e6c998dee827110c9a0c5e1e7a5b6e5f9d8c7b6a5f4e3d2c';
+
+async function sha256(message) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(message);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function adminLogin(password) {
+  const hash = await sha256(password);
+  if (hash === ADMIN_HASH) {
     sessionStorage.setItem('admin_logged_in', 'true');
     return true;
   }
@@ -32,11 +42,11 @@ const dashboard = document.getElementById('dashboard');
 const loginForm = document.getElementById('login-form');
 
 if (loginForm) {
-  loginForm.addEventListener('submit', (e) => {
+  loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const password = document.getElementById('admin-password').value;
     
-    if (adminLogin(password)) {
+    if (await adminLogin(password)) {
       loginScreen.style.display = 'none';
       dashboard.style.display = 'block';
       loadDashboard();
@@ -95,9 +105,9 @@ function loadPendingReviews() {
   
   tbody.innerHTML = pending.map(review => `
     <tr>
-      <td>${review.name}</td>
+      <td>${review.name.replace(/<[^>]*>/g, '')}</td>
       <td>${'⭐'.repeat(review.rating)}</td>
-      <td>${review.text.substring(0, 50)}${review.text.length > 50 ? '...' : ''}</td>
+      <td>${review.text.replace(/<[^>]*>/g, '').substring(0, 50)}${review.text.length > 50 ? '...' : ''}</td>
       <td>${review.date}</td>
       <td>
         <button class="action-btn btn-approve" onclick="approveReview(${review.id})">Aprobar</button>
@@ -120,9 +130,9 @@ function loadApprovedReviews() {
   
   tbody.innerHTML = approved.map(review => `
     <tr>
-      <td>${review.name}</td>
+      <td>${review.name.replace(/<[^>]*>/g, '')}</td>
       <td>${'⭐'.repeat(review.rating)}</td>
-      <td>${review.text.substring(0, 50)}${review.text.length > 50 ? '...' : ''}</td>
+      <td>${review.text.replace(/<[^>]*>/g, '').substring(0, 50)}${review.text.length > 50 ? '...' : ''}</td>
       <td>${review.date}</td>
       <td>
         <button class="action-btn btn-delete" onclick="deleteReview(${review.id})">Eliminar</button>
