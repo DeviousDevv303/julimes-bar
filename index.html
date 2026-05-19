@@ -117,7 +117,7 @@
                 <div class="divider"></div>
                 <p class="section-subtitle" data-es="Lo mejor en bebidas y botanas" data-en="The best in drinks and snacks">Lo mejor en bebidas y botanas</p>
             </div>
-            <div class="menu-categories">
+            <div class="menu-categories" id="menu-categories">
                 <div class="menu-category">
                     <h3>🍺 <span data-es="Cervezas" data-en="Beers">Cervezas</span></h3>
                     <ul class="menu-list">
@@ -210,7 +210,7 @@
                 <div class="divider"></div>
                 <p class="section-subtitle" data-es="No te pierdas nuestras noches especiales" data-en="Don't miss our special nights">No te pierdas nuestras noches especiales</p>
             </div>
-            <div class="events-grid">
+            <div class="events-grid" id="events-grid">
                 <div class="event-card">
                     <div class="event-date">
                         <span class="day">SÁB</span>
@@ -302,14 +302,14 @@
                         <span class="contact-icon">📞</span>
                         <div>
                             <h4 data-es="Teléfono / WhatsApp" data-en="Phone / WhatsApp">Teléfono / WhatsApp</h4>
-                            <p><a href="tel:+526391679514">639 167 9514</a></p>
+                            <p><a href="tel:+526391679514" id="contact-phone-link"><span id="contact-phone-text">639 167 9514</span></a></p>
                         </div>
                     </div>
                     <div class="contact-item">
                         <span class="contact-icon">🕐</span>
                         <div>
                             <h4 data-es="Horario" data-en="Hours">Horario</h4>
-                            <p data-es="Jueves a Lunes: 5:00 PM - 12:00 AM<br>Martes y Miércoles: Cerrado" data-en="Thursday to Monday: 5:00 PM - 12:00 AM<br>Tuesday & Wednesday: Closed">Jueves a Lunes: 5:00 PM - 12:00 AM<br>Martes y Miércoles: Cerrado</p>
+                            <p id="contact-hours" data-es="Jueves a Lunes: 5:00 PM - 12:00 AM<br>Martes y Miércoles: Cerrado" data-en="Thursday to Monday: 5:00 PM - 12:00 AM<br>Tuesday & Wednesday: Closed">Jueves a Lunes: 5:00 PM - 12:00 AM<br>Martes y Miércoles: Cerrado</p>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -320,8 +320,8 @@
                         </div>
                     </div>
                     <div class="social-links">
-                        <a href="https://wa.me/526391679514" class="social-btn" target="_blank">WhatsApp</a>
-                        <a href="#" class="social-btn" target="_blank">Facebook</a>
+                        <a href="https://wa.me/526391679514" class="social-btn" target="_blank" rel="noopener" id="whatsapp-link">WhatsApp</a>
+                        <a class="social-btn" target="_blank" rel="noopener" id="facebook-link" style="display: none;">Facebook</a>
                     </div>
                 </div>
                 <div class="map-container">

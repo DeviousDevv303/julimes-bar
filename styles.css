@@ -213,7 +213,7 @@ a:hover {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('assets/hero-bg.jpg') center/cover;
+  background: url('assets/bar-area.jpg') center/cover;
   opacity: 0.3;
 }
 
@@ -560,6 +560,16 @@ a:hover {
 .item-name {
   color: var(--color-text);
   font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.item-name small {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  font-weight: 400;
+  line-height: 1.4;
 }
 
 .item-price {
